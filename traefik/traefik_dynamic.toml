@@ -1,0 +1,9 @@
+[http.middlewares.simpleAuth.basicAuth]
+  users = [
+    "admin:$apr1$jtYN/6uF$ZPl1DrYCTZvAiH7ftw2pS1"
+  ]
+[http.routers.api]
+  rule = "Host(`console.localhost.lan`)"
+  entrypoints = ["web"]
+  middlewares = ["simpleAuth"]
+  service = "api@internal"

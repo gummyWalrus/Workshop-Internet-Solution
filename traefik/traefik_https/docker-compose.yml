@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  nodejs:
+    build: fedora42
+    ports:
+      - "8081:8081"
+    networks:
+      - traefik
+    labels:
+      - traefik.http.routers.fedora.rule=Host(`fedora42.fr`)
+      - traefik.http.routers.fedora.tls=true
+      - traefik.http.routers.fedora.tls.certresolver=lets-encrypt
+      - traefik.port=8081
+
+  python:
+    build: python4.2
+    ports:
+      - "5000:5000"
+    networks:
+      - traefik
+    labels:
+      - traefik.http.routers.python.rule=Host(`python42.fr`)
+      - traefik.http.routers.python.tls=true
+      - traefik.http.routers.python.tls.certresolver=lets-encrypt
+      - traefik.port=5000
+
+networks:
+  traefik:
+    external: true

@@ -1,0 +1,19 @@
+[entryPoints]
+  [entryPoints.web]
+    address = ":80"
+
+  [entryPoints.websecure]
+    address = ":443"
+[api]
+  dashboard = true
+[certificatesResolvers.lets-encrypt.acme]
+  email = "<ton adresse email ici>"
+  storage = "acme.json"
+  [certificatesResolvers.lets-encrypt.acme.httpChallenge]
+    entryPoint = "web"
+[providers.docker]
+  watch = true
+  network = "traefik"
+
+[providers.file]
+  filename = "traefik_dynamic.toml"
